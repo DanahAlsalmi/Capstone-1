@@ -1,4 +1,60 @@
 package com.example.capstone1.Controller;
 
+import com.example.capstone1.Api.ApiResponse;
+import com.example.capstone1.Model.MerchantStock;
+import com.example.capstone1.Service.MerchantStockService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1/merchant-stock")
+@RequiredArgsConstructor
 public class MerchantStockController {
+
+    private final MerchantStockService merchantStockService;
+
+
+    //test Done
+    @GetMapping("/get")
+    public ResponseEntity getMerchantStock() {
+        return ResponseEntity.status(200).body(merchantStockService.getMerchantStocks());
+    }
+
+    //test Done
+    @PostMapping("/add")
+    public ResponseEntity addMerchantStock(@Valid @RequestBody MerchantStock merchantStock, Errors errors) {
+        if (errors.hasErrors()) {
+            String msg = errors.getFieldError().getDefaultMessage();
+            return ResponseEntity.status(400).body(msg);
+        }
+        merchantStockService.addMerchantStock(merchantStock);
+        return ResponseEntity.status(200).body(new ApiResponse("Merchant Stock Added Successfully"));
+    }
+
+    //test Done
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateMerchantStock(@PathVariable int id ,@Valid @RequestBody MerchantStock merchantStock, Errors errors) {
+        if (errors.hasErrors()) {
+            String msg = errors.getFieldError().getDefaultMessage();
+            return ResponseEntity.status(400).body(msg);
+        }
+        boolean isUpdated = merchantStockService.updateMerchantStock(id,merchantStock);
+        if (isUpdated) {
+            return ResponseEntity.status(200).body(new ApiResponse("Merchant Stock Updated"));
+        }
+        return ResponseEntity.status(404).body(new ApiResponse("Merchant Stock Not Found"));
+    }
+
+    ///test Done
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteMerchantStock(@PathVariable int id) {
+        boolean isDeleted = merchantStockService.deleteMerchantStock(id);
+        if (isDeleted) {
+            return ResponseEntity.status(200).body(new ApiResponse("Merchant Stock Deleted"));
+        }
+        return ResponseEntity.status(404).body(new ApiResponse("Merchant Stock Not Found"));
+    }
 }
