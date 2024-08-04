@@ -1,10 +1,8 @@
 package com.example.capstone1.Controller;
-
 import com.example.capstone1.Api.ApiResponse;
 import com.example.capstone1.Model.User;
 import com.example.capstone1.Service.UserService;
 import jakarta.validation.Valid;
-import lombok.Generated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
