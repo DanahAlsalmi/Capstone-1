@@ -56,4 +56,15 @@ public class MerchantStockController {
         }
         return ResponseEntity.status(404).body(new ApiResponse("Merchant Stock Not Found"));
     }
+
+    // Add stock to existing Merchant Stock
+    @PutMapping("/add-stock/{productId}/{merchantId}/{additionalStock}")
+    public ResponseEntity addStock(@PathVariable int productId, @PathVariable int merchantId, @PathVariable int additionalStock) {
+        boolean isAdded = merchantStockService.addStock(productId, merchantId, additionalStock);
+        if (isAdded) {
+            return ResponseEntity.status(200).body(new ApiResponse("Stock added successfully"));
+        } else {
+            return ResponseEntity.status(400).body(new ApiResponse("Invalid product ID or merchant ID"));
+        }
+    }
 }

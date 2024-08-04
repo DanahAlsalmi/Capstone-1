@@ -42,4 +42,13 @@ public class UserService {
         }
         return false;
     }
+
+    public User findUserById(int id) {
+        for (User user : users) {
+            if (user.getId() == id) {
+                return user;
+            }
+        }
+        return null;
+    }
 }

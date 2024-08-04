@@ -42,4 +42,14 @@ public class ProductService {
         }
         return false;
     }
+
+    // Find Product by ID
+    public Product findProductById(int id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
+    }
 }
