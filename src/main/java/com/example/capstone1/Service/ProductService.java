@@ -1,6 +1,5 @@
 package com.example.capstone1.Service;
 
-import com.example.capstone1.Model.Category;
 import com.example.capstone1.Model.MerchantStock;
 import com.example.capstone1.Model.Product;
 import com.example.capstone1.Model.User;
@@ -16,9 +15,7 @@ public class ProductService {
 
     private final ArrayList<Product> products = new ArrayList<>();
     private final UserService userService;
-
     private final MerchantStockService merchantStockService;
-
     private final PurchaseHistoryService purchaseHistoryService;
 
     //Get Products
@@ -53,7 +50,6 @@ public class ProductService {
         return false;
     }
 
-
     // Get product by ID
     public Product getProductById(int productId) {
         for (Product product : products) {
@@ -64,8 +60,7 @@ public class ProductService {
         return null;
     }
 
-
-
+    //User Buy
     public String purchase(int userId, int productId, int merchantId) {
         // Validate user ID
         User user = null;
@@ -123,12 +118,10 @@ public class ProductService {
         user.setBalance(user.getBalance() - productPrice);
         userService.updateUser(userId, user);
 
-
+        //save to History
         purchaseHistoryService.recordPurchase(userId, productId, merchantId, 1, productPrice);
-
 
         return "Purchase successful";
     }
-
 
 }

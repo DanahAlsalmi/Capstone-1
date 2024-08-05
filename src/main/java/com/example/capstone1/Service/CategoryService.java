@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 @Service
 public class CategoryService {
+
     //Array for Category
     ArrayList<Category> categories = new ArrayList<>();
 

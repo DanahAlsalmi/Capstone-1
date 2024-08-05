@@ -15,11 +15,13 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
+    //Get all categories
     @GetMapping("/categories")
     public ResponseEntity getAllCategories() {
         return ResponseEntity.status(200).body(categoryService.getCategories());
     }
 
+    //Add category
     @PostMapping("/add")
     public ResponseEntity addCategory(@Valid @RequestBody Category category, Errors errors) {
         if (errors.hasErrors()) {
@@ -30,6 +32,7 @@ public class CategoryController {
         return ResponseEntity.status(201).body(new ApiResponse("Category added successfully"));
     }
 
+    //Update category
     @PutMapping("/update/{categoryId}")
     public ResponseEntity updateCategory(@PathVariable int categoryId, @Valid @RequestBody Category category, Errors errors) {
         if (errors.hasErrors()) {
@@ -43,6 +46,7 @@ public class CategoryController {
         return ResponseEntity.status(404).body(new ApiResponse("Category not found"));
     }
 
+    //Delete category
     @DeleteMapping("/delete/{categoryId}")
     public ResponseEntity deleteCategory(@PathVariable int categoryId) {
         boolean isCategoryDeleted = categoryService.deleteCategory(categoryId);

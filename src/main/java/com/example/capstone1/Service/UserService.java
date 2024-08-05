@@ -1,13 +1,11 @@
 package com.example.capstone1.Service;
 
-import com.example.capstone1.Model.Product;
 import com.example.capstone1.Model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -58,7 +56,6 @@ public class UserService {
         return null;
     }
 
-
     //Prime subscribe
     public User subscribeToPrime(int userId) {
         User user = getUserById(userId);
@@ -83,6 +80,5 @@ public class UserService {
         }
         return false;
     }
-
 
 }

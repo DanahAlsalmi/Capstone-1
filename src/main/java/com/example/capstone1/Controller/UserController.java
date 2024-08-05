@@ -22,15 +22,13 @@ public class UserController {
     private final UserService userService;
     private final ProductService productService;
 
-
-
-    //test Done.
+    //Get All Users
     @GetMapping("/users")
     public ResponseEntity getAllUsers() {
         return ResponseEntity.status(200).body(userService.getUsers());
     }
 
-    //test Done
+    //Add users
     @PostMapping("/add")
     public ResponseEntity addUser(@Valid @RequestBody User user, Errors errors) {
         if (errors.hasErrors()) {
@@ -41,7 +39,7 @@ public class UserController {
         return ResponseEntity.status(200).body(new ApiResponse("User added successfully"));
     }
 
-    //test Done
+    //Update User
     @PutMapping("/update/{userId}")
     public ResponseEntity updateUser(@PathVariable int userId, @Valid @RequestBody User user, Errors errors) {
         if (errors.hasErrors()) {
@@ -55,7 +53,7 @@ public class UserController {
         return ResponseEntity.status(400).body(new ApiResponse("User Not found"));
     }
 
-    //test Done
+    //Delete User
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity deleteUser(@PathVariable int userId) {
         boolean isDeleted = userService.deleteUser(userId);
@@ -65,6 +63,7 @@ public class UserController {
         return ResponseEntity.status(400).body(new ApiResponse("User Not found"));
     }
 
+    //Get user By ID
     @GetMapping("/{userId}")
     public ResponseEntity getUserById(@PathVariable int userId) {
         User user = userService.getUserById(userId);
@@ -75,6 +74,7 @@ public class UserController {
         }
     }
 
+    //Prime Membership
     @PostMapping("/subscribe-prime/{userId}")
     public ResponseEntity subscribeToPrime(@PathVariable int userId) {
         User user = userService.getUserById(userId);
@@ -92,6 +92,7 @@ public class UserController {
         return ResponseEntity.status(200).body(subscribedUser);
     }
 
+    //Cancel Prime membership
     @PutMapping("/cancel-prime/{userId}")
     public ResponseEntity cancelPrimeSubscription(@PathVariable int userId) {
         boolean success = userService.cancelPrimeSubscription(userId);
@@ -102,9 +103,9 @@ public class UserController {
         }
     }
 
-
+    //Add to Wishlist
     @PostMapping("/add-wishlist/{userId}/{productId}")
-    public ResponseEntity<?> addItemToWishlist(@PathVariable int userId, @PathVariable int productId) {
+    public ResponseEntity addItemToWishlist(@PathVariable int userId, @PathVariable int productId) {
         User user = userService.getUserById(userId);
         if (user == null) {
             return ResponseEntity.status(404).body(new ApiResponse("User not found"));
@@ -117,8 +118,9 @@ public class UserController {
         return ResponseEntity.status(200).body(new ApiResponse("Product added to wishlist"));
     }
 
+    //Get user wishlist
     @GetMapping("/wishlist/{userId}")
-    public ResponseEntity<?> getUserWishlist(@PathVariable int userId) {
+    public ResponseEntity getUserWishlist(@PathVariable int userId) {
         ArrayList<Product> wishlist = wishlistService.getUserWishlist(userId);
         if (wishlist != null) {
             return ResponseEntity.status(200).body(wishlist);
@@ -127,8 +129,9 @@ public class UserController {
         }
     }
 
+    //Remove from wishlist
     @DeleteMapping("/wishlist/{userId}/{productId}")
-    public ResponseEntity<?> removeItemFromWishlist(@PathVariable int userId, @PathVariable int productId) {
+    public ResponseEntity removeItemFromWishlist(@PathVariable int userId, @PathVariable int productId) {
         User user = userService.getUserById(userId);
         if (user == null) {
             return ResponseEntity.status(404).body(new ApiResponse("User not found"));

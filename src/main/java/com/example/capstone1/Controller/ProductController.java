@@ -16,13 +16,13 @@ public class ProductController {
 
     private final ProductService productService;
 
-    //test Done
+    //Get All Products
     @GetMapping("/get")
     public ResponseEntity getAllProducts() {
         return ResponseEntity.status(200).body(productService.getProducts());
     }
 
-    //test Done
+    //Add product
     @PostMapping("/add")
     public ResponseEntity addProduct(@Valid @RequestBody Product product , Errors errors) {
         if (errors.hasErrors()) {
@@ -33,7 +33,7 @@ public class ProductController {
         return ResponseEntity.status(201).body(new ApiResponse("Product added successfully"));
     }
 
-    //test Done
+    //Update product
     @PutMapping("/update/{productId}")
     public ResponseEntity updateProduct(@PathVariable int productId, @Valid @RequestBody Product product, Errors errors) {
         if (errors.hasErrors()) {
@@ -47,7 +47,7 @@ public class ProductController {
         return ResponseEntity.status(404).body(new ApiResponse("Product not found"));
     }
 
-    //test Done
+    //Delete product
     @DeleteMapping("/delete/{productId}")
     public ResponseEntity deleteProduct(@PathVariable int productId) {
         boolean isDeleted = productService.deleteProduct(productId);
@@ -57,7 +57,7 @@ public class ProductController {
         return ResponseEntity.status(404).body(new ApiResponse("Product not found"));
     }
 
-
+    //User buy
     @PostMapping("/buy/{userId}/{productId}/{merchantId}")
     public ResponseEntity buyProduct(@PathVariable int userId, @PathVariable int productId, @PathVariable int merchantId) {
         String result = productService.purchase(userId, productId, merchantId);

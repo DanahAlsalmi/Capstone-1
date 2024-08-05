@@ -16,8 +16,9 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class PurchaseHistoryController {
 
-     final PurchaseHistoryService purchaseHistoryService;
+    final PurchaseHistoryService purchaseHistoryService;
 
+    //Purchase History
     @GetMapping("/user/{userId}")
     public ResponseEntity getUserPurchaseHistory(@PathVariable int userId) {
         ArrayList<PurchaseHistory> purchaseHistory = purchaseHistoryService.getUserPurchaseHistory(userId);

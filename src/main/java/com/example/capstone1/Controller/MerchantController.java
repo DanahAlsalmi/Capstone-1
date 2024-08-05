@@ -15,12 +15,13 @@ public class MerchantController {
 
     private final MerchantService merchantService;
 
-
+    //Get All merchant
     @GetMapping("/merchants")
     public ResponseEntity getMerchants() {
         return ResponseEntity.status(200).body(merchantService.getMerchants());
     }
 
+    //Add merchant
     @PostMapping("/add")
     public ResponseEntity addMerchant(@Valid @RequestBody Merchant merchant, Errors errors) {
         if (errors.hasErrors()) {
@@ -31,6 +32,7 @@ public class MerchantController {
         return ResponseEntity.status(201).body(new ApiResponse("Merchant added successfully"));
     }
 
+    //Update merchant
     @PutMapping("/update/{merchantId}")
     public ResponseEntity updateMerchant(@PathVariable int merchantId, @Valid @RequestBody Merchant merchant, Errors errors) {
         if (errors.hasErrors()) {
@@ -44,6 +46,7 @@ public class MerchantController {
         return ResponseEntity.status(404).body(new ApiResponse("Merchant not found"));
     }
 
+    //Delete merchant
     @DeleteMapping("/delete/{merchantId}")
     public ResponseEntity deleteMerchant(@PathVariable int merchantId) {
         boolean isDeleted = merchantService.deleteMerchant(merchantId);

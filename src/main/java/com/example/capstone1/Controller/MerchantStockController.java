@@ -15,14 +15,13 @@ public class MerchantStockController {
 
     private final MerchantStockService merchantStockService;
 
-
-    //test Done
+    //Get All merchant stock
     @GetMapping("/get")
     public ResponseEntity getMerchantStock() {
         return ResponseEntity.status(200).body(merchantStockService.getMerchantStocks());
     }
 
-    //test Done
+    //Add merchant stock
     @PostMapping("/add")
     public ResponseEntity addMerchantStock(@Valid @RequestBody MerchantStock merchantStock, Errors errors) {
         if (errors.hasErrors()) {
@@ -33,7 +32,7 @@ public class MerchantStockController {
         return ResponseEntity.status(200).body(new ApiResponse("Merchant Stock Added Successfully"));
     }
 
-    //test Done
+    //Update merchant stock
     @PutMapping("/update/{id}")
     public ResponseEntity updateMerchantStock(@PathVariable int id ,@Valid @RequestBody MerchantStock merchantStock, Errors errors) {
         if (errors.hasErrors()) {
@@ -47,7 +46,7 @@ public class MerchantStockController {
         return ResponseEntity.status(404).body(new ApiResponse("Merchant Stock Not Found"));
     }
 
-    ///test Done
+    //Delete merchant stock
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteMerchantStock(@PathVariable int id) {
         boolean isDeleted = merchantStockService.deleteMerchantStock(id);
@@ -63,7 +62,7 @@ public class MerchantStockController {
         boolean isAdded = merchantStockService.addStock(productId, merchantId, additionalStock);
         if (isAdded) {
             return ResponseEntity.status(200).body(new ApiResponse("Stock added successfully"));
-        } else {
+        } else{
             return ResponseEntity.status(400).body(new ApiResponse("Invalid product ID or merchant ID"));
         }
     }

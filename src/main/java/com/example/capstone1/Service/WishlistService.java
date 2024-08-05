@@ -1,6 +1,5 @@
 package com.example.capstone1.Service;
 
-
 import com.example.capstone1.Model.Product;
 import com.example.capstone1.Model.User;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +15,8 @@ public class WishlistService {
     private final ProductService productService;
 
 
+    //Add item to wishlist
     public void addItemToWishlist(int userId, int productId) {
-
         User user = userService.getUserById(userId);
         if (user != null) {
             Product product = productService.getProductById(productId);
@@ -27,6 +26,7 @@ public class WishlistService {
         }
     }
 
+    //Get user wishlist
     public ArrayList<Product> getUserWishlist(int userId) {
         User user = userService.getUserById(userId);
         if (user != null) {
@@ -35,6 +35,7 @@ public class WishlistService {
         return null;
     }
 
+    //Remove from user wishlist
     public void removeItemFromWishlist(int userId, int productId) {
         User user = userService.getUserById(userId);
         if (user != null) {
