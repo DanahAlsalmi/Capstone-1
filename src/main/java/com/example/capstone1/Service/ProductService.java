@@ -1,5 +1,6 @@
 package com.example.capstone1.Service;
 
+import com.example.capstone1.Model.Category;
 import com.example.capstone1.Model.MerchantStock;
 import com.example.capstone1.Model.Product;
 import com.example.capstone1.Model.User;
@@ -13,13 +14,12 @@ import java.util.ArrayList;
 public class ProductService {
 
 
-    ArrayList<Product> products = new ArrayList<>();
+    private final ArrayList<Product> products = new ArrayList<>();
     private final UserService userService;
 
     private final MerchantStockService merchantStockService;
 
     private final PurchaseHistoryService purchaseHistoryService;
-
 
     //Get Products
     public ArrayList<Product> getProducts() {
@@ -52,6 +52,18 @@ public class ProductService {
         }
         return false;
     }
+
+
+    // Get product by ID
+    public Product getProductById(int productId) {
+        for (Product product : products) {
+            if (product.getId() == productId) {
+                return product;
+            }
+        }
+        return null;
+    }
+
 
 
     public String purchase(int userId, int productId, int merchantId) {
@@ -117,4 +129,6 @@ public class ProductService {
 
         return "Purchase successful";
     }
+
+
 }

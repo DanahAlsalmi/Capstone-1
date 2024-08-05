@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api/v1/product")
 @RequiredArgsConstructor
@@ -16,7 +17,7 @@ public class ProductController {
     private final ProductService productService;
 
     //test Done
-    @GetMapping("/products")
+    @GetMapping("/get")
     public ResponseEntity getAllProducts() {
         return ResponseEntity.status(200).body(productService.getProducts());
     }
@@ -66,4 +67,5 @@ public class ProductController {
             return ResponseEntity.status(400).body(new ApiResponse(result));
         }
     }
+
 }
