@@ -55,4 +55,15 @@ public class ProductController {
         }
         return ResponseEntity.status(404).body(new ApiResponse("Product not found"));
     }
+
+
+    @PostMapping("/buy/{userId}/{productId}/{merchantId}")
+    public ResponseEntity buyProduct(@PathVariable int userId, @PathVariable int productId, @PathVariable int merchantId) {
+        String result = productService.purchase(userId, productId, merchantId);
+        if (result.equals("Purchase successful")) {
+            return ResponseEntity.status(200).body(new ApiResponse(result));
+        } else {
+            return ResponseEntity.status(400).body(new ApiResponse(result));
+        }
+    }
 }

@@ -43,6 +43,8 @@ public class MerchantStockService {
         return false;
     }
 
+
+
     // Add Stock to Existing MerchantStock
     public boolean addStock(int productId, int merchantId, int additionalStock) {
         for (MerchantStock stock : merchantStocks) {
@@ -54,29 +56,5 @@ public class MerchantStockService {
         return false;
     }
 
-    // Reduce Stock from Existing MerchantStock
-    public boolean reduceStock(int productId, int merchantId, int quantity) {
-        for (MerchantStock stock : merchantStocks) {
-            if (stock.getProductId() == productId && stock.getMerchantId() == merchantId) {
-                if (stock.getStock() >= quantity) {
-                    stock.setStock(stock.getStock() - quantity);
-                    return true;
-                } else {
-                    return false; // Not enough stock
-                }
-            }
-        }
-        return false; // Invalid product ID or merchant ID
-    }
 
-
-    // Find MerchantStock by Product and Merchant ID
-    public MerchantStock findMerchantStock(int productId, int merchantId) {
-        for (MerchantStock stock : merchantStocks) {
-            if (stock.getProductId() == productId && stock.getMerchantId() == merchantId) {
-                return stock;
-            }
-        }
-        return null;
-    }
 }
